@@ -44,7 +44,7 @@ jobs:
           docker_version: '20.10.7'
 
       - name: Docker Build Images
-        run: docker build -f Dockerfile -t chandra-img-app:latest .
+        run: docker build -f Dockerfile -t chandraapp:latest .
 
       - name: Docker Scout Scan
         run : |
