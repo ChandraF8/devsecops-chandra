@@ -23,7 +23,7 @@ jobs:
       - name: Run Bandit Scan
         run : bandit -ll -ii -r . -f json -o chandra-devsecops-report.json # command -ll and -ii untuk memfilter hanya menampilkan report di level medium dan high kerentanan masalaha pada code nya 
 
-      - name: Upload Artifact Report 
+      - name: Upload Artifact Bandit Report 
         uses: actions/upload-artifact@v3
         if: always()
         with:
@@ -62,3 +62,12 @@ jobs:
           dockerhub-user: ${{ secrets.REPO_USER}}
           dockerhub-password: ${{ secrets.REPO_PASSWORD }}
           command: quickview, cves
+          only-severities: critical, high
+          sarif-file: scout-report-chandra.sarif
+
+      - name: Upload Artifact Scout Report 
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: scout-report
+          path: scout-report-chandra.sarif
